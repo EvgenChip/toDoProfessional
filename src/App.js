@@ -1,25 +1,61 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+
+import listSvg from './assets/img/sidebarMenu.svg'
+import './App.css'
+import List from './components/List/List'
+import AddButtonList from './components/AddButtonList/AddButtonList'
+
+import db from './assets/db.json'
+import Tasks from './components/Tasks/Tasks'
+
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    const [lists, setLists] = useState(
+        db.lists.map(item => {
+            item.color = db.colors.filter(color => color.id === item.colorId)[0].name
+            return item
+        }))
+
+
+
+
+    const onAddList = obj => {
+        const newList = [...lists, obj]
+        setLists(newList)
+
+    }
+
+
+    return <div className="todo">
+        <div className='todo__sidebar'>
+            <List items={[
+                {
+                    icon: listSvg,
+                    name: 'Все задачи'
+                },
+
+
+            ]} />
+            <List items={lists}
+                onRemove={(item) => { console.log(item) }}
+                isRemovable />
+
+
+            <AddButtonList colors={db.colors} onAdd={onAddList} />
+
+
+
+        </div>
+
+
+        <div div className='todo__tasks' >
+            <Tasks />
+
+        </div>
+
     </div>
-  );
+
 }
 
-export default App;
+export default App

@@ -1,0 +1,80 @@
+.list {
+    $self: &;
+
+
+    margin-bottom: 30px;
+
+    .icon__add-button {
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        color: #767676;
+        opacity: 0.6;
+
+
+
+
+
+        &:hover {
+            opacity: 2;
+        }
+    }
+
+
+
+    li {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        padding: 10px 12px;
+        margin-bottom: 5px;
+
+
+        #{$self}__remove-icon {
+            opacity: 0;
+
+            padding-left: 62px;
+
+            &:hover {
+                opacity: 10;
+
+
+
+
+            }
+        }
+
+
+        &:hover #{$self}__remove-icon {
+            opacity: 5;
+        }
+
+
+
+        span {
+            flex: 1;
+
+        }
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        &.active {
+            background: #FFFFFF;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 4px;
+            padding: 10px 12px;
+
+        }
+
+        i {
+            margin-right: 10px;
+            display: inline-flex;
+            border-radius: 30px;
+        }
+
+
+    }
+}

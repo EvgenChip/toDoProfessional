@@ -1,0 +1,79 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    outline: none;
+    font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+}
+
+.todo {
+    display: flex;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 750px;
+    height: 530px;
+    transform: translate(-50%, -50%);
+    box-shadow: 1px 2px 28px #77c763a8;
+    border: 1px solid #F4F6F8;
+    border-radius: 28px;
+    font-size: 14px;
+
+    &__sidebar {
+        background: #F4F6F8;
+        width: 200px;
+        height: calc(100% - 120px);
+        border-right: 1px solid #F1F1F1;
+        padding: 60px 20px
+    }
+
+    &__tasks {
+        flex: 1;
+        padding: 60px;
+
+    }
+
+}
+
+
+
+.button {
+    border: none;
+    background: #4DD599;
+    border-radius: 4px;
+    color: #FFFFFF;
+    padding: 10px 20px;
+
+    &:hover {
+        background: darken($color: #4DD599, $amount: 5%);
+        cursor: pointer;
+    }
+
+    &:active {
+        background: darken($color: #4DD599, $amount: 10%);
+    }
+}
+
+.field {
+    padding: 8px 12px;
+    box-sizing: border-box;
+    background: #FFFFFF;
+    border: 1px solid #EFEFEF;
+    border-radius: 4px;
+    width: 100%;
+
+    &:focus {
+        border: 1px solid #77c763a8;
+        box-shadow: 1px 2px 28px #77c763a8;
+
+    }
+
+}
+
+
+
+body {
+    font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
