@@ -44,6 +44,7 @@
     color: #FFFFFF;
     padding: 10px 20px;
 
+
     &:hover {
         background: darken($color: #4DD599, $amount: 5%);
         cursor: pointer;
@@ -52,6 +53,21 @@
     &:active {
         background: darken($color: #4DD599, $amount: 10%);
     }
+    &:disabled{
+        background: #d8d8d8; ;
+    }
+
+    &--grey{
+        background:#F4F6F8 ;
+        color:#444444 ;
+        &:hover{
+        background: darken($color: #F4F6F8, $amount: 3%);
+        }
+        &:active{
+            background: darken($color: #F4F6F8, $amount: 5%);
+        }
+            }
+
 }
 
 .field {

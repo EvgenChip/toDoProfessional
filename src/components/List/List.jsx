@@ -6,7 +6,14 @@ import axios from "axios";
 import "./List.scss";
 import Badge from "../Badge/Badge";
 
-const List = ({ items, isRemovable, onClick, onRemove }) => {
+const List = ({
+  items,
+  isRemovable,
+  onClick,
+  onRemove,
+  onClickItem,
+  activeItem,
+}) => {
   isRemovable = true;
 
   const removeList = (item) => {
@@ -21,8 +28,11 @@ const List = ({ items, isRemovable, onClick, onRemove }) => {
     <ul onClick={onClick} className="list">
       {items.map((item, index) => (
         <li
+          onClick={onClickItem ? () => onClickItem(item) : null}
           key={index}
-          className={classNames(item.className, { active: item.active })}>
+          className={classNames(item.className, {
+            active: activeItem && activeItem.id === item.id,
+          })}>
           <i>
             {item.icon ? (
               <img src={item.icon}></img>
@@ -31,7 +41,10 @@ const List = ({ items, isRemovable, onClick, onRemove }) => {
             )}
           </i>
 
-          <span>{item.name}</span>
+          <span>
+            {item.name}
+            {item.tasks && `(${item.tasks.length})`}
+          </span>
           <span>
             {isRemovable && (
               <img

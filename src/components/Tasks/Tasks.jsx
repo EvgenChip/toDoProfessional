@@ -1,31 +1,48 @@
-import React from 'react'
-import './Tasks.scss'
-import panIcon from '../../assets/img/pain.svg'
-import okTask from '../../assets/img/okTask.svg'
+import React from "react";
+import "./Tasks.scss";
+import panIcon from "../../assets/img/pain.svg";
+import okTask from "../../assets/img/okTask.svg";
 
-const Tasks = () => {
+import axios from "axios";
+import { AddTaskForm } from "./AddTaskForm";
 
-    return (
-      <div className="tasks">
-        <h2 className="tasks__title">
-          Фронтед
-          <img src={panIcon} alt="" />
-        </h2>
-        <div className="tasks__items">
-          <div className="tasks__items-row">
+const Tasks = ({ list, onEditTitle, onAddTask }) => {
+  const editTitle = () => {
+    const newTitle = window.prompt("Название списка", list.name);
+    if (newTitle) {
+      onEditTitle(list.id, newTitle);
+      axios
+        .patch("http://localhost:3001/lists/" + list.id, {
+          name: newTitle,
+        })
+        .catch(() => {
+          alert("что то не так");
+        });
+    }
+  };
+  return (
+    <div className="tasks">
+      <h2 className="tasks__title">
+        {list.name}
+        <img onClick={editTitle} src={panIcon} alt="edit icon" />
+      </h2>
+      <div className="tasks__items">
+        {!list.tasks.length && <h2>Задачи отсутствуют</h2>}
+        {list.tasks.map((task) => (
+          <div key={task.id} className="tasks__items-row">
             <div className="checkbox">
-              <input id="check" type="checkbox" />
-              <label htmlFor="check">
+              <input id={`task${task.id}`} type="checkbox" />
+              <label htmlFor={`task${task.id}`}>
                 <img src={okTask} alt="" />
               </label>
             </div>
-            <p>ReactJS Hooks (useState, useReducer, useEffect и т.д.)</p>
+            <p>{task.text}</p>
           </div>
-        </div>
+        ))}
+        <AddTaskForm list={list} onAddTask={onAddTask} />
       </div>
-    );
-}
+    </div>
+  );
+};
 
-
-
-export default Tasks
+export default Tasks;
